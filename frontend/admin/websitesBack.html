@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@300&family=Noto+Sans+Mono&family=Poppins:wght@300&family=Satisfy&display=swap');
+        *{
+            font-family: Poppins;
+            font-weight: lighter;
+        }
+        #container{
+            display: flex;
+            
+        }
+        #users-menu{
+            gap:20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box{
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            border-radius: 0px 50px ;
+            width: 300px;
+            padding: 10px;
+            text-align: center;
+        }
+        .avatar{
+            border-radius: 50%;
+            width: 50%;
+        }
+        .productBox{
+            border: 1px solid black;
+        }
+        .productImg{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="left">
+            <div id="users">
+                <input type="button" value="Users" onclick="getUsers()">
+            </div>
+            <br>
+            <div id="products">
+                <input type="button" value="Products" onclick="getProducts()">
+            </div>
+        </div>
+        <div id="right">
+            <div id="users-menu">
+                <!-- Append the data using JS -->
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let userMenu = document.getElementById('users-menu')
+
+    function getUsers(){
+        fetch('http://localhost:8080/admin/',{
+            method : "GET",
+            headers:{
+                "Content-type":"application/json",
+                Authorization:localStorage.getItem('token')
+            }
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((data)=>{
+            renderUsers(data);
+        })
+    }
+
+    function renderUsers(data){
+        userMenu.innerHTML = null;
+        data.forEach((element)=> {
+            console.log(element);
+            let box = document.createElement('div');
+            box.setAttribute('class','box')
+            let avatar = document.createElement("img");
+            avatar.setAttribute('class','avatar')
+            avatar.setAttribute('src','https://th.bing.com/th?id=OIP.ghnm15vRm0mVIoQoEm1VOAAAAA&w=212&h=212&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2')
+            let name = document.createElement('h2');
+            name.innerText = "Name :"+" "+element.name;
+            let id = document.createElement('h4');
+            id.innerText = "ID :"+" "+element._id;
+            let gender = document.createElement('h4');
+            gender.innerText = "Gender :"+" "+element.gender;
+            let email = document.createElement('h4');
+            email.innerText = "Email :"+" "+element.email;
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerText = "DELETE";
+            
+            deleteBtn.addEventListener('click',()=>{
+                fetch(`http://localhost:8080/admin/${element._id}`,{
+                    method:"DELETE",
+                    headers:{
+                        Authorization:localStorage.getItem('token')
+                    }
+                })
+                 .then(()=>{
+                    getUsers();
+                 })
+                
+            })
+            box.append(avatar,name,id,gender,email,deleteBtn);
+            userMenu.append(box);
+        })
+    }
+
+
+
+    function getProducts(){
+        fetch('http://localhost:8080/products/',{
+            method : "GET",
+            headers:{
+                "Content-type":"application/json",
+                Authorization:localStorage.getItem('token')
+            }
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((data)=>{
+            console.log(data);
+        })
+    }
+
+    function renderProducts(data){
+        userMenu.innerHTML = null;
+        data.forEach((element)=>{
+            let productBox = document.createElement('div');
+            productBox.setAttribute('class','productBox');
+            let productImg = document.createElement('img');
+            productImg.setAttribute('class','productImg')
+            productImg.setAttribute('src',element.image);
+            let title = document.createElement('h5');
+            title.innerText = element.name;
+            let priceTag = document.createElement('h6');
+            priceTag.innerText = "Rs."+" "+element.price
+
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerText = "DELETE";
+            
+            deleteBtn.addEventListener('click',()=>{
+                fetch(`http://localhost:8080/products/delete/${element._id}`,{
+                    method:"DELETE",
+                    headers:{
+                        Authorization:localStorage.getItem('token')
+                    }
+                })
+                 .then(()=>{
+                    getProducts();
+                 })
+                
+            })
+            productBox.append(productImg,title,priceTag,deleteBtn);
+            userMenu.append(productBox);
+        })
+    }
+</script>
+</html>

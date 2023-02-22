@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            margin: 0px;
+            font-family: poppins;
+        }
+        #container{
+            background-image: url('./91908ad2f9aef293ed840739a291e9db.gif');
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        #box{
+            display: flex;
+            height: 100vh;
+            width: 93%;
+            justify-content: right;
+            align-items: center;
+        }
+        #box>div{
+            background-color: aliceblue;
+            border-radius: 10px;
+            padding: 50px 80px 30px 80px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+        }
+        #name,
+        #email,
+        #password,
+        #dob {
+            padding: 10px 40px;
+            border-radius: 5px;
+
+        }
+        #submit{
+            padding: 5px 20px;
+        }
+        #submit:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="box">
+            <div>
+                <input type="email" id="email" placeholder="Email"><br><br>
+                <input type="password" id="password" placeholder="Password"><br><br>
+                <input type="button" id="submit" value="Submit" onclick="login()"><br><br>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function login(){
+        let obj = {
+            email:document.getElementById('email').value,
+            password:document.getElementById('password').value
+        }
+
+        fetch('http://localhost:8080/admin/login',{
+            method:"POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body:JSON.stringify(obj)
+        })
+         .then((res)=>{
+            return res.json()
+         })
+         .then((data)=>{
+            localStorage.setItem('email',data.email);
+            localStorage.setItem('token',data.token);
+            if(data){
+                window.location.href = "./websitesBack.html"
+            }else{
+                alert('You are not the Admin')
+            }
+         })
+         .catch(()=>{
+            console.log("User Not Found!");
+         })
+
+            document.getElementById('email').value = ""
+            document.getElementById('password').value = ""
+    }
+</script>
+
+</html>
