@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@300&family=Noto+Sans+Mono&family=Poppins:wght@300&family=Satisfy&display=swap');
         *{
@@ -13,19 +14,26 @@
         }
         #container{
             display: flex;
-            
+            gap: 20px;
         }
         #users-menu{
             gap:20px;
             display: flex;
             flex-wrap: wrap;
+            justify-content: space-evenly;
         }
         .box{
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             border-radius: 0px 50px ;
-            width: 300px;
+            width: 250px;
             padding: 10px;
             text-align: center;
+        }
+        #left{
+            width: 25%;
+        }
+        #right{
+            width: 70%;
         }
         .avatar{
             border-radius: 50%;
@@ -33,21 +41,128 @@
         }
         .productBox{
             border: 1px solid black;
+            padding: 20px;
         }
         .productImg{
             width: 200px;
+        }
+        .deleteBtn{
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px 10px;
+        }
+        .editBtn{
+            background-color: rgb(155, 250, 13);
+            border: none;
+            color: black;
+            padding: 5px 20px;
+            border-radius: 10px 20px;
+        }
+        .editBtn:hover{
+            cursor: pointer;
+        }
+        .deleteBtn:hover{
+            cursor: pointer;
+        }
+        #addProducts{
+            padding: 20px;
+            line-height: 10px;
+            text-align: center;
+        }
+        #editProducts{
+            padding: 20px;
+            line-height: 10px;
+            text-align: center;
+        }
+        #searchBox{
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #name,#imageUrl,#category,#price,#description,#searchBar,
+        #editName,#editImageUrl,#editCategory,#editPrice,#editDescription{
+            width: 100%;
+        }
+        #buttonsX{
+            padding: 20px;
+        }
+        #users{
+            width: 100%;
+            border: none;
+            background-color: rgb(155, 250, 13);
+            padding: 10px 30px;
+            border-radius:30px 10px;
+            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        }
+        #products{
+            width: 100%;
+            border: none;
+            background-color: rgb(155, 250, 13);
+            padding: 10px 30px;
+            border-radius:10px 30px;
+            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        }
+        #users,#products,#addNew:hover{
+            cursor: pointer;
+        }
+        .bottom{
+            display: flex;
+            justify-content: space-between;
+        }
+        #addNew,#editNew{
+            border: none;
+            background-color: rgb(155, 250, 13);
+            /* color: white; */
+            padding: 10px 30px;
+            border-radius:30px 20px;
+            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        }
+        #searchIcon{
+            /* border: 1px solid black; */
+            padding: 5px;
+        }
+        #editProducts{
+            display: none;
         }
     </style>
 </head>
 <body>
     <div id="container">
         <div id="left">
-            <div id="users">
-                <input type="button" value="Users" onclick="getUsers()">
+            <div id="buttonsX">
+                <div>
+                    <input type="button" value="Users" id="users" onclick="getUsers()">
+                </div>
+                <br>
+                <div>
+                    <input type="button" value="Products" id="products" onclick="getProducts()">
+                </div>
             </div>
-            <br>
-            <div id="products">
-                <input type="button" value="Products" onclick="getProducts()">
+            <div id="editProducts">
+                <h2 id="editHead">Edit Products</h2>
+                <input type="text" id="editName" placeholder="Name"><br><br>
+                <input type="text" id="editImageUrl" placeholder="Image Link"><br><br>
+                <input type="text" id="editCategory" placeholder="Category"><br><br>
+                <input type="text" id="editPrice" placeholder="Price"><br><br>
+                <input type="text" id="editDescription" placeholder="Description"><br><br>
+                <input type="button" value="Update Details" onclick="editProduct()" id="editNew">
+            </div>
+            <div id="addProducts">
+                <h2 id="addNewHead">Add New Products</h2>
+                <input type="text" id="name" placeholder="Name"><br><br>
+                <input type="text" id="imageUrl" placeholder="Image Link"><br><br>
+                <input type="text" id="category" placeholder="Category"><br><br>
+                <input type="text" id="price" placeholder="Price"><br><br>
+                <input type="text" id="description" placeholder="Description"><br><br>
+                <input type="button" value="Add New Product" onclick="addNewProduct()" id="addNew">
+            </div>
+            <div id="searchBox">
+                <input type="search" id="searchBar">
+                <i class="material-icons" id="searchIcon" onclick="search()">search</i>
             </div>
         </div>
         <div id="right">
@@ -59,7 +174,7 @@
 </body>
 <script>
     let userMenu = document.getElementById('users-menu')
-
+    let myNeededData;
     function getUsers(){
         fetch('http://localhost:8080/admin/',{
             method : "GET",
@@ -94,6 +209,7 @@
             let email = document.createElement('h4');
             email.innerText = "Email :"+" "+element.email;
             let deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class','deleteBtn')
             deleteBtn.innerText = "DELETE";
             
             deleteBtn.addEventListener('click',()=>{
@@ -108,6 +224,7 @@
                  })
                 
             })
+
             box.append(avatar,name,id,gender,email,deleteBtn);
             userMenu.append(box);
         })
@@ -127,10 +244,12 @@
             return res.json()
         })
         .then((data)=>{
-            console.log(data);
+            myNeededData=data;
+            // console.log(myNeededData);
+            renderProducts(data);
         })
     }
-
+    console.log(myNeededData);
     function renderProducts(data){
         userMenu.innerHTML = null;
         data.forEach((element)=>{
@@ -144,7 +263,10 @@
             let priceTag = document.createElement('h6');
             priceTag.innerText = "Rs."+" "+element.price
 
+            let bottom = document.createElement('div');
+            bottom.setAttribute('class','bottom')
             let deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class','deleteBtn')
             deleteBtn.innerText = "DELETE";
             
             deleteBtn.addEventListener('click',()=>{
@@ -159,9 +281,57 @@
                  })
                 
             })
-            productBox.append(productImg,title,priceTag,deleteBtn);
+
+            let editBtn = document.createElement('button');
+            editBtn.setAttribute('class','editBtn');
+            editBtn.innerText = "EDIT"
+            editBtn.addEventListener('click',()=>{
+                let editProducts = document.getElementById('editProducts');
+                editProducts.style.display = "block";
+            })
+            bottom.append(deleteBtn,editBtn)
+            productBox.append(productImg,title,priceTag,bottom);
             userMenu.append(productBox);
         })
     }
+
+
+    function addNewProduct(){
+        let obj = {
+            name:document.getElementById('name').value,
+            category:document.getElementById('category').value,
+            image:document.getElementById('imageUrl').value,
+            price:document.getElementById('price').value,
+            description:document.getElementById('description').value
+        }
+        
+        fetch('http://localhost:8080/products/add',{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json",
+                Authorization:localStorage.getItem('token')
+            },
+            body:JSON.stringify(obj)
+        })
+        .then(()=>{
+            getProducts();
+        })
+
+        document.getElementById('name').value = "";
+        document.getElementById('category').value = "";
+        document.getElementById('imageUrl').value = "";
+        document.getElementById('price').value = "";
+        document.getElementById('description').value = "";
+    }
+    
+    // function search(){
+    //     let searchBar = document.getElementById("searchBar").value;
+    //     let searchData = myNeededData.filter((elem)=>{
+    //         return elem.name.toLowerCase().includes(searchBar.toLowerCase());
+    //      })
+    //     // userMenu.innerHTML=null;
+    //     console.log(searchData)
+    //     // renderProducts(searchData);
+    // }
 </script>
 </html>
