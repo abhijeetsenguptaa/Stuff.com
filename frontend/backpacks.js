@@ -1,5 +1,5 @@
 const backpacksMenu = document.getElementById('backpacksMenu')
-
+const itemView = [];
 
 fetch('http://localhost:8080/products/backpacks',{
     method:"GET",
@@ -36,6 +36,13 @@ fetch('http://localhost:8080/products/backpacks',{
         bag_offer.innerText = "FREE DUFFLE BAG / KEYCHAIN SET*"
         template.append(bag_image,bag_name,bag_price,bag_offer);
         backpacksMenu.append(template)
+
+
+        template.addEventListener('click',()=>{
+            itemView.push(element);
+            localStorage.setItem('itemView',JSON.stringify(itemView));
+            window.location.href = "./itemView.html"
+        })
     })
  }
 

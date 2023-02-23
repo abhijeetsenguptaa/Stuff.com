@@ -4,6 +4,8 @@ const purchasedSchema = mongoose.Schema({
     "name":String,
     "email":String,
     "price":Number,
+    "category":String,
+    "purchased_on":String,
     "purchased_by":String
 })
 
