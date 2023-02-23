@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@300&family=Noto+Sans+Mono&family=Poppins:wght@300&family=Satisfy&display=swap');
+        *{
+            margin: 0px;
+            font-family: poppins;
+        }
+        #logOut{
+            position: fixed;
+            bottom: 10px;
+            right:   0px;
+            padding: 10px 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 10px 20px;
+        }
+        #logOut:hover{
+            cursor: pointer;
+        }
+        #navigation>div{
+            display: flex;
+            padding: 12px;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(198, 196, 196);
+        }
+        #navItems{
+            display: flex;
+            gap: 28px;
+            font-size: 11.5px;
+        }
+        #navItems>h3:hover{
+            cursor: pointer;
+            color: green;
+        }
+        #icons{
+            display: flex;
+            gap: 15px;
+        }
+        #studioCollections>h3,#collections>h3{
+            padding: 30px 0px 0px 20px;
+        }
+        #studioItems,#collectionItems{
+            display: flex;
+            width: 96%;
+            gap: 14px;
+            padding: 20px;
+        }
+        #zoot{
+            padding: 25px 0px 25px 0px;
+        }
+        #workCharging{
+            display: flex;
+            width: 96%;
+            padding: 22px;
+            justify-content: space-between;
+        }
+        #ourStory{
+            display: flex;
+            width: 95%;
+            padding: 30px;
+        }
+        #left{
+            width: 100%;
+            padding: 20px;
+        }
+        #right{
+            width: 100%;
+        }
+        #storyContent{
+            width: 70%;
+            font-size: 16px;
+        }
+        .borderGray{
+            border-top: 1px solid rgb(219, 217, 217);
+            width: 100%;
+           text-align: center;
+           padding: 40px 0px 30px 0px;
+        }
+        .delivery{
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        #handler{
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 20px;
+        }
+        #emailHolder{
+            padding: 20px;
+        }
+        #knowMore{
+            display: flex;
+        }
+        #knowLeft{
+            display: flex;
+            width: 60%;
+            text-align: left;
+            justify-content: space-between;
+            padding: 0px 40px 0px 40px;
+        }
+        #knowRight{
+            width: 40%;
+            text-align: left;
+            padding: 0px 30px 0px 30px;
+        }
+        #knowRight>div{
+            padding: 0px 20px 20px;
+        }
+        .borderGray>h3{
+            padding-bottom: 20px;
+        }
+        #cases,#ers,#lets,#watchbands,#sleeves,#office{
+            display: flex;
+            text-align: left;
+            justify-content: space-between;
+            line-height: 30px;
+            font-size: 12px;
+        }
+        #covers,#homeOffice,#staps,#bags,#wal,#oth{
+            text-align: left;
+            padding: 30px;
+        }
+        #covers>h4,#homeOffice>h4,#staps>h4,#bags>h4,#wal>h4,#oth>h4{
+            margin-left: 38px;
+        }
+        #backpacksMenu{
+            display: grid;
+            padding: 20px;
+            gap: 20px;
+            grid-template-columns: repeat(4,1fr);
+        }
+        .bag_image{
+            width: 100%;
+        }
+        .watch_image{
+            width: 100%;
+            height: 60%;
+        }
+        .bag_name{
+            font-weight: lighter;
+        }
+        .bag_offer{
+            color: red;
+        }
+
+
+        @media screen and (min-width:600px) and (max-width : 1200px){
+            #backpacksMenu{
+                display: grid;
+                padding: 20px;
+                gap: 20px;
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+
+        @media screen and (min-width:0px) and (max-width : 600px){
+            #backpacksMenu{
+                display: grid;
+                padding: 20px;
+                gap: 20px;
+                grid-template-columns: repeat(1,1fr);
+            }
+        }

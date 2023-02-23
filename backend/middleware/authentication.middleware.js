@@ -10,7 +10,8 @@ const authentication = (req,res,next) => {
                 // userID = decode.userID;
                 // req.body.userID = userID;
                 email = decode.email;
-                req.body.added_by = email
+                req.body.added_by = email;
+                req.body.purchased_by = email;
                 next();
             }
         })
