@@ -29,7 +29,7 @@
                     <h3>GIFTING</h3>
                 </div>
                 <div id="icons">
-                    <a href="./cartPage.html"><i class="material-icons">shopping_bag</i></a>
+                    <i class="material-icons">shopping_bag</i>
                     <i class="material-icons">person</i>
                     <i class="material-icons">search</i>
                 </div>
@@ -38,8 +38,44 @@
         <!-- NAVIGATION BAR  -->
         
         <!--Appending all the data from the Javascript  -->
-        <div id="itemsMenu">
-            <!-- Check the JS -->
+        <div id="shoppingBag">
+            <h1>SHOPPING BAG</h1>
+            <div id="cartMenu">
+                <!-- Check the JS -->
+                <div id="leftBox">
+                    <!-- Append the data from Javascript -->
+                </div>
+                <div id="rightBox">
+                    <div id="coupons">
+                        <img src="https://images.dailyobjects.com/marche/assets/images/other/offers-icon-324-280px.png?tr=cm-pad_resize,v-2" width="10%">
+                        <h4>COUPONS & OFFERS</h4>
+                    </div>
+                    <div id="redeemGift">
+                        <img src="https://images.dailyobjects.com/marche/assets/images/other/gift-card-icon-2024-1388.png?tr=cm-pad_resize,v-2" width="10%">
+                        <h4>REDDEM GIFT CARD</h4>
+                    </div>
+                    <div id="orderSummary">
+                        <h4>ORDER SUMMARY</h4>
+                        <div class="rightBoxCoupon">
+                            <h4>Item Total (<span id="totalCount">0 </span> items)</h4>
+                            <h4>Rs.<span id="totalAmount">00</span></h4>
+                        </div>
+                        <div class="rightBoxCoupon">
+                            <h4>Discount</h4>
+                            <h4>Rs.00</h4>
+                        </div>
+                        <div class="rightBoxCoupon">
+                            <h4>Shipping</h4>
+                            <h4>FREE</h4>
+                        </div>
+                        <div id="grand">
+                            <h4>Grand Total</h4>
+                            <h4>Rs. <span id="totalAmount1">00</span></h4>
+                        </div>
+                        <button id="checkOut">CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!--Appending all the data from the Javascript  -->
 
@@ -358,5 +394,5 @@
         <!-- Logout Button -->
     </div>
 </body>
-<script src="./itemView.js"></script>
+<script src="./cartPage.js"></script>
 </html>
