@@ -1,5 +1,5 @@
 const backpacksMenu = document.getElementById('backpacksMenu')
-
+let itemView = [];
 
 fetch('http://localhost:8080/products/smartwatch',{
     method:"GET",
@@ -36,6 +36,12 @@ fetch('http://localhost:8080/products/smartwatch',{
         bag_offer.innerText = "BUY ANY 3 @ 2499 ONLY"
         template.append(bag_image,bag_name,bag_price,bag_offer);
         backpacksMenu.append(template)
+
+        template.addEventListener('click',()=>{
+            itemView.push(element);
+            localStorage.setItem('itemView',JSON.stringify(itemView));
+            window.location.href = "./itemView.html"
+        })
     })
  }
 

@@ -149,16 +149,18 @@
         }
         .itemView_name{
             padding: 30px 30px 0px 30px;
+            font-weight: lighter;
         }
         .itemView_price{
             padding: 4px 30px 0px 30px;
+            font-size: 26px;
         }
         .itemView_color{
             padding: 20px 30px 10px 30px;
             border-bottom: 3px solid rgb(213, 210, 210);
+            color: #20a87e;
         }
         .itemView_right{
-            border: 1px solid black;
             width: 100%;
             padding: 60px;
         }
@@ -194,6 +196,109 @@
             font-weight: bolder;
             color: white;
             border: none;
+        }
+        .addToCart:hover{
+            cursor: pointer;
+        }
+        .offers{
+            color: red;
+            padding: 20px 30px 0px 30px;
+        }
+        .discountCoupon{
+            padding: 10px 30px 10px 30px;
+        }
+        .itemView_search{
+            width: 93%;
+            padding: 15px;
+        }
+        .itemView_desc{
+            font-weight: lighter;
+            padding: 30px;
+        }
+        #shoppingBag>h1{
+            padding: 30px;
+            text-align: center;
+        }
+        #cartMenu{
+            display: flex;
+        }
+        #leftBox{
+            width: 50%;
+            height: 60vh;
+            overflow: auto;
+            padding:30px;
+            line-height: 30px;
+        }
+        #rightBox{
+            width: 50%;
+            padding:30px;
+        }
+        #redeemGift{
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            border-top: 1px solid rgb(217, 215, 215);
+            border-bottom: 1px solid rgb(217, 215, 215);
+            gap: 20px;
+        }
+        #coupons{
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-top: 1px solid rgb(217, 215, 215);
+            border-bottom: 1px solid rgb(217, 215, 215);
+            gap: 20px;
+        }
+        .rightBoxCoupon{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(217, 215, 215);
+        }
+        #grand{
+            display: flex;
+            justify-content: space-between;
+        }
+        #orderSummary{
+            padding: 30px;
+            line-height: 50px;
+        }
+        #checkOut{
+            width: 100%;
+            font-weight: bolder;
+            color: white;
+            background-color: #20a87e;
+            padding: 15px;
+            border: none;
+        }
+        #checkout:hover{
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+        .cart_box{
+            display: flex;
+            padding: 20px;
+            border-bottom: 2px solid rgb(212, 209, 209);
+        }
+        .cart_image{
+            width: 30%;
+        }
+        .cart_productDetails{
+            padding: 20px;
+        }
+        .cart_price{
+            padding: 0px 10px 10px 10px;
+        }
+
+        .cart_name{
+            padding: 10px;
+        }
+        .cart_removeButton{
+            width: 100%;
+            padding:6px;
+            color: white;
+            background-color: red;
+            border: none;
+            font-weight: bolder;
         }
         @media screen and (min-width:600px) and (max-width : 1200px){
             #backpacksMenu{
