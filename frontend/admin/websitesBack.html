@@ -195,7 +195,6 @@
     function renderUsers(data){
         userMenu.innerHTML = null;
         data.forEach((element)=> {
-            console.log(element);
             let box = document.createElement('div');
             box.setAttribute('class','box')
             let avatar = document.createElement("img");
@@ -228,6 +227,12 @@
 
             box.append(avatar,name,id,gender,email,deleteBtn);
             userMenu.append(box);
+
+
+            box.addEventListener('click',()=>{
+                localStorage.setItem('email',element.email)
+                window.location.href = "./viewPurchases.html"
+            })
         })
     }
 
