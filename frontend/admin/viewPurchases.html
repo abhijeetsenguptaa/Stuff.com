@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User's History</title>
+    <style>
+        #head{
+            text-align: center;
+        }
+        #items{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        .userHistoryBox{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+        }
+        .userHistoryDelete{
+            width: 100%;
+            padding: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+        }
+        .userHistoryDelete:hover{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainContainer">
+        <div id="head">
+            <h1>User's History</h1>
+        </div>
+        <div id="items">
+            <!-- Append the data using the Javascript -->
+        </div>
+    </div>
+</body>
+<script>
+    let items = document.getElementById('items');
+    fetch(`http://localhost:8080/purchase/purchased_by?purchased_by=${localStorage.getItem('email')}`,{
+        method:"GET",
+        headers:{
+            Authorization:localStorage.getItem('token')
+        }
+    })
+     .then((res)=>{
+        return res.json();
+     })
+     .then((data)=>{
+        console.log(data);
+        renderUserHistory(data);
+     })
+
+
+     function renderUserHistory(data){
+        items.innerHTML = null;
+        data.forEach((element)=>{
+            let userHistoryBox = document.createElement('div');
+            userHistoryBox.setAttribute('class','userHistoryBox');
+            let userHistoryProductName = document.createElement('h2');
+            userHistoryProductName.innerText = "Name of the Product :"+" "+element.name;
+            let userHistoryProductPrice = document.createElement('h2');
+            userHistoryProductPrice.innerText = "Price :"+" "+element.price;
+            let userHistoryCategory = document.createElement('h2');
+            userHistoryCategory.innerText = "Category :"+" "+element.category;
+            let userHistoryProductPurchasedOn = document.createElement('h2');
+            userHistoryProductPurchasedOn.innerText = "Purchased On :"+" "+ element.purchased_on;
+            let userHistoryDelete = document.createElement('button');
+            userHistoryDelete.setAttribute('class','userHistoryDelete')
+            userHistoryDelete.innerText="DELETE";
+            userHistoryDelete.addEventListener('click',()=>{
+                fetch(`http://localhost:8080/purchase/delete/${element._id}`,{
+                    method:"DELETE",
+                    headers:{
+                        Authorization:localStorage.getItem('token')
+                    }
+                })
+                 .then((res)=>{
+                    return res.json();
+                 })
+                 .then((data)=>{
+                    renderUserHistory(data)
+                 })
+            })
+            userHistoryBox.append(userHistoryProductName,userHistoryProductPrice,userHistoryCategory,userHistoryProductPurchasedOn,userHistoryDelete);
+            items.append(userHistoryBox)
+        })
+     }
+
+     
+</script>
+</html>
