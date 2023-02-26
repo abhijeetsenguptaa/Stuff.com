@@ -66,3 +66,7 @@ logOut.addEventListener('click',()=>{
     localStorage.setItem('email',null);
     window.location.href = "./index.html"
 })
+
+let cartTotaller = document.getElementById('cartTotaller');
+
+cartTotaller.innerText = cartView.length;

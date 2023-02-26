@@ -28,7 +28,8 @@
             gap: 28px;
             font-size: 11.5px;
         }
-        #navItems>h3:hover{
+        #navItems>h3:hover .navBar-hidden{
+            display: block;
             cursor: pointer;
             color: green;
         }
@@ -219,6 +220,17 @@
             padding: 30px;
             text-align: center;
         }
+        #cartTotaller{
+            background-color: green;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bolder;
+            position: relative;
+            top: -20px;
+            left: -10px;
+            border-radius: 50%;
+        }
         #cartMenu{
             display: flex;
         }
@@ -270,7 +282,7 @@
             padding: 15px;
             border: none;
         }
-        #checkout:hover{
+        #checkOut:hover{
             cursor: pointer;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         }
@@ -299,6 +311,19 @@
             background-color: red;
             border: none;
             font-weight: bolder;
+        }
+        .cart_removeButton:hover{
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+        .navBar-hidden{
+            display: flex;
+            width: 100%;
+            display: none;
+        }
+        .temp:hover{
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         }
         @media screen and (min-width:600px) and (max-width : 1200px){
             #backpacksMenu{

@@ -11,6 +11,12 @@
             margin: 0px;
             font-family: poppins;
         }
+        body{
+            background-image: url(./Stuff.com.png);
+            background-repeat: no-repeat;
+            width: 100%;
+            background-position: center;
+        }
         #email,
         #password,
         #adminEmail,
@@ -33,6 +39,7 @@
             align-items: center;
         }
         .box1{
+            background-color: aliceblue;
             text-align: center;
             padding: 80px 40px;
             border-radius: 20px 30px;
@@ -42,6 +49,7 @@
             padding: 10px;
         }
         .box2{
+            background-color: aliceblue;
             text-align: center;
             padding: 80px 40px;
             border-radius: 20px 30px;
@@ -104,6 +112,7 @@
             localStorage.setItem('email',data.email);
             localStorage.setItem('token',data.token);
             if(data){
+                alert(`Welcome ${JSON.stringify(data.email)}`)
                 window.location.href = "./index.html"
             }else{
                 alert('You are not a User')
@@ -138,6 +147,7 @@
             localStorage.setItem('email',data.email);
             localStorage.setItem('token',data.token);
             if(data){
+                alert('Welcome ADMIN')
                 window.location.href = "./admin/websitesBack.html"
             }else{
                 alert('You are not the Admin')

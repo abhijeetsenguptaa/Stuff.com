@@ -69,3 +69,8 @@ sortData.addEventListener("change", () => {
     backpacksMenu.innerHTML = null;
     renderBackpacks(myNeededData);
 })
+
+let cartTotaller = document.getElementById('cartTotaller');
+let cartView = JSON.parse(localStorage.getItem('cartView'))
+
+cartTotaller.innerText = cartView.length;

@@ -8,7 +8,7 @@ let totalCount = document.getElementById("totalCount");
 totalCount.innerText = cartView.length;
 let checkOut = document.getElementById("checkOut");
 function cartItems(data) {
-  let sum = 0;
+  sum = 0;
   leftBox.innerHTML = null;
   data.forEach((element, index) => {
     let cart_box = document.createElement("div");
