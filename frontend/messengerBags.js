@@ -1,7 +1,7 @@
 const backpacksMenu = document.getElementById('backpacksMenu')
 let itemView = [];
-
-fetch('http://localhost:8080/products/messengerbags',{
+myNeededData =[];
+fetch('https://defiant-plum-bat.cyclic.app/products/messengerbags',{
     method:"GET",
     headers:{
         "Content-type":"application/json",
@@ -12,6 +12,7 @@ fetch('http://localhost:8080/products/messengerbags',{
     return res.json();
  })
  .then((data)=>{
+    myNeededData = data;
     renderBackpacks(data);
  })
 
@@ -52,4 +53,17 @@ logOut.addEventListener('click',()=>{
     localStorage.setItem('token',null);
     localStorage.setItem('email',null);
     window.location.href = "./index.html"
+})
+
+let sortData = document.getElementById("sort");
+sortData.addEventListener("change", () => {
+
+    if (sortData.value == "l2h") {
+        myNeededData.sort((a, b) => a.price - b.price)
+    }
+    if (sortData.value == "h2l") {
+        myNeededData.sort((a, b) => b.price - a.price)
+    }
+    backpacksMenu.innerHTML = null;
+    renderBackpacks(myNeededData);
 })

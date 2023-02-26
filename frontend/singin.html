@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        * {
+            margin: 0px;
+            font-family: poppins;
+        }
+        #email,
+        #password,
+        #adminEmail,
+        #adminPassword{
+            padding: 10px 40px;
+            border-radius: 5px;
+
+        }
+        #submit{
+            padding: 5px 20px;
+        }
+        #submit:hover{
+            cursor: pointer;
+        }
+        #loginPortal{
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .box1{
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 20px 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .box1>div>h2{
+            padding: 10px;
+        }
+        .box2{
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 20px 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .box2>div>h2{
+            padding: 10px;
+        }
+        /* .innerBox{
+            border: 1px solid black;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="loginPortal">
+            <div class="box1">
+                <div class="innerBox">
+                    <h2>User Login</h2>
+                    <input type="email" id="email" placeholder="Email"><br><br>
+                    <input type="password" id="password" placeholder="Password"><br><br>
+                    <input type="button" id="submit" value="Submit" onclick="login()"><br><br>
+                    <a href="./register.html">New User? Click Here to Register!!</a>
+                </div>
+            </div>
+      
+        
+            <div class="box2">
+                <div class="innerBox">
+                    <h2>Admin Login</h2>
+                    <input type="email" id="adminEmail" placeholder="Email"><br><br>
+                    <input type="password" id="adminPassword" placeholder="Password"><br><br>
+                    <input type="button" id="submit" value="Submit" onclick="adminLogin()"><br><br>
+                </div>
+            </div>
+    </div>
+</body>
+<script>
+
+
+
+// User's Login Portal-------------------------------------------------------------------------------------------
+    function login(){
+        let obj = {
+            email:document.getElementById('email').value,
+            password:document.getElementById('password').value
+        }
+
+        fetch('https://defiant-plum-bat.cyclic.app/users/login',{
+            method:"POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body:JSON.stringify(obj)
+        })
+         .then((res)=>{
+            return res.json()
+         })
+         .then((data)=>{
+            localStorage.setItem('email',data.email);
+            localStorage.setItem('token',data.token);
+            if(data){
+                window.location.href = "./index.html"
+            }else{
+                alert('You are not a User')
+            }
+         })
+         
+
+            document.getElementById('email').value = ""
+            document.getElementById('password').value = ""
+    }
+
+
+
+// Admin's Login Portal-------------------------------------------------------------------------------------------
+    function adminLogin(){
+        let obj = {
+            email:document.getElementById('adminEmail').value,
+            password:document.getElementById('adminPassword').value
+        }
+
+        fetch('https://defiant-plum-bat.cyclic.app/admin/login',{
+            method:"POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body:JSON.stringify(obj)
+        })
+         .then((res)=>{
+            return res.json()
+         })
+         .then((data)=>{
+            localStorage.setItem('email',data.email);
+            localStorage.setItem('token',data.token);
+            if(data){
+                window.location.href = "./admin/websitesBack.html"
+            }else{
+                alert('You are not the Admin')
+            }
+         })
+         .catch(()=>{
+            alert('You are not the Admin');
+         })
+
+            document.getElementById('adminEmail').value = ""
+            document.getElementById('adminPassword').value = ""
+    }
+</script>
+</html>

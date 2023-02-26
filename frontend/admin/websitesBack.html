@@ -18,9 +18,8 @@
         }
         #users-menu{
             gap:20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
         }
         .box{
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -42,10 +41,10 @@
         .productBox{
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
             padding: 20px;
-            width: 23%;
+            /* width: 23%; */
         }
         .productImg{
-            width: 200px;
+            width: 100%;
         }
         .deleteBtn{
             background-color: red;
@@ -129,6 +128,25 @@
         #editProducts{
             display: none;
         }
+
+        @media screen and (min-width:1200px) and (max-width:1600px){
+            #users-menu{
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+            }
+        }
+        @media screen and (min-width:600px) and (max-width:1200px){
+            #users-menu{
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+        @media screen and (min-width:00px) and (max-width:600px){
+            #users-menu{
+                display: grid;
+                grid-template-columns: repeat(1,1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -177,7 +195,7 @@
     let userMenu = document.getElementById('users-menu')
     
     function getUsers(){
-        fetch('http://localhost:8080/admin/',{
+        fetch('https://defiant-plum-bat.cyclic.app/admin/',{
             method : "GET",
             headers:{
                 "Content-type":"application/json",
@@ -213,7 +231,7 @@
             deleteBtn.innerText = "DELETE";
             
             deleteBtn.addEventListener('click',()=>{
-                fetch(`http://localhost:8080/admin/${element._id}`,{
+                fetch(`https://defiant-plum-bat.cyclic.app/admin/${element._id}`,{
                     method:"DELETE",
                     headers:{
                         Authorization:localStorage.getItem('token')
@@ -239,7 +257,7 @@
 
     let myNeededData = [];
     function getProducts(){
-        fetch('http://localhost:8080/products/',{
+        fetch('https://defiant-plum-bat.cyclic.app/products/',{
             method : "GET",
             headers:{
                 "Content-type":"application/json",
@@ -274,7 +292,7 @@
             deleteBtn.innerText = "DELETE";
             
             deleteBtn.addEventListener('click',()=>{
-                fetch(`http://localhost:8080/products/delete/${element._id}`,{
+                fetch(`https://defiant-plum-bat.cyclic.app/products/delete/${element._id}`,{
                     method:"DELETE",
                     headers:{
                         Authorization:localStorage.getItem('token')
@@ -309,7 +327,7 @@
             description:document.getElementById('description').value
         }
         
-        fetch('http://localhost:8080/products/add',{
+        fetch('https://defiant-plum-bat.cyclic.app/products/add',{
             method:"POST",
             headers:{
                 "Content-type":"application/json",
@@ -331,7 +349,7 @@
 
     function search(){
         const search = document.getElementById('searchBar').value;
-        fetch(`http://localhost:8080/products/category?category=${search}`,{
+        fetch(`https://defiant-plum-bat.cyclic.app/products/category?category=${search}`,{
             method : "GET",
             headers : {
                 Authorization : localStorage.getItem('token')

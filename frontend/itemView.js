@@ -37,6 +37,7 @@ itemView.forEach((element)=>{
     addToCart.addEventListener('click',()=>{
         cartView.push(element);
         localStorage.setItem('cartView',JSON.stringify(cartView));
+        alert('Product added to the cart!!')
     })
 
     let offers = document.createElement('h3');

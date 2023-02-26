@@ -43,7 +43,7 @@
 </body>
 <script>
     let items = document.getElementById('items');
-    fetch(`http://localhost:8080/purchase/purchased_by?purchased_by=${localStorage.getItem('email')}`,{
+    fetch(`https://defiant-plum-bat.cyclic.app/purchase/purchased_by?purchased_by=${localStorage.getItem('email')}`,{
         method:"GET",
         headers:{
             Authorization:localStorage.getItem('token')
@@ -75,7 +75,7 @@
             userHistoryDelete.setAttribute('class','userHistoryDelete')
             userHistoryDelete.innerText="DELETE";
             userHistoryDelete.addEventListener('click',()=>{
-                fetch(`http://localhost:8080/purchase/delete/${element._id}`,{
+                fetch(`https://defiant-plum-bat.cyclic.app/purchase/delete/${element._id}`,{
                     method:"DELETE",
                     headers:{
                         Authorization:localStorage.getItem('token')
